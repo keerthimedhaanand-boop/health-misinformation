@@ -1,5 +1,14 @@
 """
 Streamlit demo app for the Explainable AI Health Misinformation Classifier.
+
+Ties together:
+  - BERT classifier (True/Misleading/False)
+  - SHAP token-level attribution
+  - Chain-of-Thought explanation (Gemini)
+
+Run locally or in Colab with a public URL via:
+    streamlit run app.py & npx localtunnel --port 8501
+(Colab-specific launch instructions given separately.)
 """
 
 import os
@@ -101,9 +110,15 @@ def main():
         [""] + example_claims
     )
 
+    if 'claim_text_box' not in st.session_state:
+        st.session_state.claim_text_box = ""
+    if chosen_example and chosen_example != st.session_state.get('_last_example', ""):
+        st.session_state.claim_text_box = chosen_example
+    st.session_state['_last_example'] = chosen_example
+
     claim_text = st.text_area(
         "Claim to check:",
-        value=chosen_example,
+        key='claim_text_box',
         height=100,
         placeholder="Paste a health-related claim here..."
     )
