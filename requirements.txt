@@ -1,0 +1,6 @@
+streamlit
+torch
+transformers
+shap
+numpy
+google-genai
