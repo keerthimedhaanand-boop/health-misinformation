@@ -1,14 +1,5 @@
 """
 Streamlit demo app for the Explainable AI Health Misinformation Classifier.
-
-Ties together:
-  - BERT classifier (True/Misleading/False)
-  - SHAP token-level attribution
-  - Chain-of-Thought explanation (Gemini)
-
-Run locally or in Colab with a public URL via:
-    streamlit run app.py & npx localtunnel --port 8501
-(Colab-specific launch instructions given separately.)
 """
 
 import os
@@ -20,7 +11,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 from google import genai
 
 LABEL_ORDER = ['True', 'Misleading', 'False']
-MODEL_PATH = './model_output/final_model'
+MODEL_PATH = 'keerthinani/health_misinfo_classifier'
 
 COT_PROMPT_TEMPLATE = """You are a fact-checking assistant analyzing a health-related claim from social media.
 
